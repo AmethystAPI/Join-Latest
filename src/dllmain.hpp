@@ -21,3 +21,6 @@ void writeNetSettingsReq(size_t a1, size_t a2);
 void writeLogin(size_t a1, size_t a2);
 void serverReqNetSettingsHandler(size_t a1, size_t a2, size_t a3);
 void serverLoginHandler(size_t a1, size_t a2, size_t a3);
+
+void* multiplayerGameinfoFromSessionProperties(int64_t a1, int64_t a2);
+void* multiplayerGameinfoToSessionProperties(int64_t a1);
