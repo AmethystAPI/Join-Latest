@@ -20,17 +20,17 @@ ModFunction void Initialize(AmethystContext* ctx) {
     ctx->mHookManager.RegisterFunction<&serverLoginHandler>("48 89 5C 24 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D AC 24 ? ? ? ? 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 85 ? ? ? ? 4D 8B F8 4C 8B E2 48 8B F1");
 	ctx->mHookManager.CreateHook<&serverLoginHandler>(_serverLoginHandler, &serverLoginHandler);
 
-	ctx->mPatchManager.ApplyPatch(SlideAddress(0x15BAFC2), (uint32_t)686); // RequestNetworkSettingsPacket::_read() patch
-    ctx->mPatchManager.ApplyPatch(SlideAddress(0x15A419F), (uint32_t)686); // LoginPacket::_read() patch
+	ctx->mPatchManager.ApplyPatch(SlideAddress(0x15BAFC2), (uint32_t) NEW_PROTOCOL_VERSION); // RequestNetworkSettingsPacket::_read() patch
+    ctx->mPatchManager.ApplyPatch(SlideAddress(0x15A419F), (uint32_t) NEW_PROTOCOL_VERSION); // LoginPacket::_read() patch
 }
 
 void writeNetSettingsReq(size_t a1, size_t a2) {
     auto packet = (Packet*)a1;
 
     if (packet->getId() == MinecraftPacketIds::RequestNetworkSettings) {
-		unsigned int &protoVer = *(unsigned int*)(a1 + 48);
+		uint32_t &protoVer = *(unsigned int*)(a1 + 48);
 
-        protoVer = 686; // try and update the protocol LOL
+        protoVer = NEW_PROTOCOL_VERSION; // try and update the protocol LOL
         Log::Info("(NetworkSettingsPacket) Protocol version: {}", std::to_string(protoVer));
     }
 
@@ -43,7 +43,7 @@ void writeLogin(size_t a1, size_t a2) {
     if (packet->getId() == MinecraftPacketIds::Login) {
 		unsigned int& protoVer = *(unsigned int*)(a1 + 48);
 
-		protoVer = 686; // try and update the protocol LOL
+		protoVer = NEW_PROTOCOL_VERSION; // try and update the protocol LOL
 		Log::Info("(LoginPacket) Protocol version: {}", std::to_string(protoVer));
     }
 
@@ -56,7 +56,7 @@ void serverReqNetSettingsHandler(size_t a1, size_t a2, size_t a3) {
     if (packet->getId() == MinecraftPacketIds::RequestNetworkSettings) {
 		unsigned int& protoVer = *(unsigned int*)(a3 + 48);
 
-		protoVer = 685; // downgrade it back so it can join local server
+		protoVer = OLD_PROTOCOL_VERSION; // downgrade it back so it can join local server
 		Log::Info("(ServerNetworkHandler::handle RequestNetworkSettings) Protocol version: {}", std::to_string(protoVer));
     }
 
@@ -69,7 +69,7 @@ void serverLoginHandler(size_t a1, size_t a2, size_t a3) {
     if (packet->getId() == MinecraftPacketIds::Login) {
 		unsigned int& protoVer = *(unsigned int*)(a3 + 48);
 
-		protoVer = 685;
+		protoVer = OLD_PROTOCOL_VERSION;
 		Log::Info("(ServerNetworkHandler::handle Login) Protocol version: {}", std::to_string(protoVer));
     }
 
