@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
 
 # Mod Options
-project(join-latest CXX ASM_NASM)
+project(Join-Latest CXX ASM_NASM)
 set(MOD_VERSION "0.1.0")
 set(MOD_AUTHOR "Tom16")
 
