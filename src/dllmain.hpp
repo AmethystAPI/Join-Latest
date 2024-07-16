@@ -4,6 +4,9 @@
 #include <string>
 #include <amethyst/runtime/AmethystContext.hpp>
 #include <minecraft/src/common/network/packet/Packet.hpp>
+#include <minecraft/src/common/network/packet/RequestNetworkSettingsPacket.hpp>
+#include <minecraft/src/common/network/packet/LoginPacket.hpp>
+#include <minecraft/src/common/network/ServerNetworkHandler.hpp>
 
 #define ModFunction extern "C" __declspec(dllexport)
 
