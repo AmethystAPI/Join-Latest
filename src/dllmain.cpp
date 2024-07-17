@@ -6,4 +6,4 @@ ModFunction void Initialize(AmethystContext* ctx) {
     Log::Info("[Join-Latest] Started!");
 
     SpoofProtocolVersions(*ctx);
-}
+} 

@@ -54,4 +54,4 @@ add_subdirectory("$ENV{amethyst_src}/AmethystAPI" "build")
 
 # Organise files in solution explorer
 target_include_directories(${PROJECT_NAME} PRIVATE src)
-source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}/src" FILES ${${PROJECT_NAME}_All})      
+source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}/src" FILES ${${PROJECT_NAME}_All})       
