@@ -16,7 +16,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO "${AmethystFolder}/mods/${PROJ
 set(CMAKE_CXX_STANDARD 23)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set(CMAKE_CONFIGURATION_TYPES "RelWithDebInfo" CACHE STRING "Build configurations" FORCE)
-set(CMAKE_BUILD_TYPE "RelWithDebInfo" CACHE STRING "Choose the type of build, options are: RelWithDebInfo" FORCE)
+set(CMAKE_BUILD_TYPE "RelWithDebInfo" CACHE STRING "Choose the type of build, options are: RelWithDebInfo" FORCE) 
 
 # Project Files
 file(GLOB_RECURSE ${PROJECT_NAME}_All
@@ -26,7 +26,7 @@ file(GLOB_RECURSE ${PROJECT_NAME}_All
         ${CMAKE_CURRENT_SOURCE_DIR}/src/*.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h
 )
-
+ 
 add_library(${PROJECT_NAME} SHARED ${${PROJECT_NAME}_All})
 
 # Pass mod options to the source code
@@ -51,3 +51,7 @@ target_compile_definitions(${PROJECT_NAME} PUBLIC ENTT_PACKED_PAGE=128)
 
 # Get the AmethystAPI Lib
 add_subdirectory("$ENV{amethyst_src}/AmethystAPI" "build")
+
+# Organise files in solution explorer
+target_include_directories(${PROJECT_NAME} PRIVATE src)
+source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}/src" FILES ${${PROJECT_NAME}_All})      
