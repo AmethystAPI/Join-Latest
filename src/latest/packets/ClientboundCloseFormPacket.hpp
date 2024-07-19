@@ -1,9 +1,8 @@
 #pragma once
-#include <protocol_686/Protocol_686.hpp>
 #include <minecraft/src/common/network/packet/Packet.hpp>
 #include <minecraft/src/common/network/PacketHandlerDispatcherInstance.hpp>
 
-namespace Protocol_686 {
+namespace Latest {
 	class ClientboundCloseFormPacket : public Packet {
 	public:
 		virtual MinecraftPacketIds getId() const override;

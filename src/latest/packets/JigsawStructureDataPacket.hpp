@@ -1,10 +1,9 @@
 #pragma once
-#include <protocol_686/Protocol_686.hpp>
 #include <minecraft/src/common/network/packet/Packet.hpp>
 #include <minecraft/src/common/network/PacketHandlerDispatcherInstance.hpp>
 #include <minecraft/src/common/nbt/CompoundTag.hpp>
 
-namespace Protocol_686 {
+namespace Latest {
 	class JigsawStructureDataPacket : public Packet {
 	public:
 		CompoundTag mJigsawStructureDataTag;

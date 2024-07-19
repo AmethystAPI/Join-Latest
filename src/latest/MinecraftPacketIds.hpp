@@ -1,7 +1,7 @@
 #pragma once
 
-namespace Protocol_686 {
-    enum class MinecraftPacketIds_686 {
+namespace Latest {
+    enum class MinecraftPacketIds : uint32_t {
         BlockPalette_deprecated = 116,
         TitleSpecificPacketsStart = 200,
         TitleSpecificPacketsEnd = 299,
