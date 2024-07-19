@@ -6,4 +6,4 @@ constexpr const uint32_t TARGET_PROTOCOL_VERSION = 686;
 
 class AmethystContext;
 
-void SpoofProtocolVersions(AmethystContext& context);
+void SpoofProtocolVersions();

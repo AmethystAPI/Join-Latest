@@ -1,5 +1,5 @@
 #include "ProtocolVersion.hpp"
-#include <amethyst/runtime/AmethystContext.hpp>
+#include <amethyst/runtime/ModContext.hpp>
 #include <minecraft/src/common/network/packet/RequestNetworkSettingsPacket.hpp>
 #include <minecraft/src/common/network/packet/LoginPacket.hpp>
 
@@ -90,10 +90,10 @@ void* multiplayerGameinfoToSessionProperties(int64_t a1) {
     return _multiplayerGameinfoToSessionProperties.call<void*>(a1);
 }
 
-void SpoofProtocolVersions(AmethystContext& context)
+void SpoofProtocolVersions()
 {
-	HookManager& hooks = *context.mHookManager;
-    Amethyst::PatchManager& patches = *context.mPatchManager;
+    auto& hooks = Amethyst::GetHookManager();
+    auto& patches = Amethyst::GetPatchManager();
 
     // RequestNetworkSettingsPacket::write()
     hooks.RegisterFunction<&RequestNetworkSettingsPacket::write>("48 8B C2 8B 51 ? 48 8B C8 E9 ? ? ? ? CC CC 48 89 5C 24 ? 55 56 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 ? 48 8B DA 48 8B F9 48 89 54 24 ? 33 F6 48 8D 54 24 ? 49 8B C8 E8 ? ? ? ? 90 48 8B D0 48 8D 4D ? E8 ? ? ? ? 48 8B D0 48 8D 4D ? E8 ? ? ? ? 40 38 75 ? 75 ? 48 8D 4D ? E8 ? ? ? ? 48 8D 4D ? E8 ? ? ? ? 90 80 7C 24 ? ? 75 ? 48 8D 4C 24 ? E8 ? ? ? ? 48 8D 4C 24 ? E8 ? ? ? ? 80 7D ? ? 0F 85 ? ? ? ? 0F 10 05 ? ? ? ? 0F 11 44 24 ? 0F 10 0D ? ? ? ? 0F 11 4C 24 ? C6 45 ? ? 48 8B 55 ? 48 3B 55 ? 74 ? 0F 11 02 0F 11 4A ? C6 42 ? ? 80 7D ? ? 74 ? 0F 57 C0 0F 11 42 ? 48 89 72 ? 48 89 72 ? 0F 10 44 24 ? 0F 11 42 ? 0F 10 4C 24 ? 0F 11 4A ? 66 0F 6F 05 ? ? ? ? F3 0F 7F 44 24 ? C6 44 24 ? ? 48 8B 44 24 ? 48 89 42 ? 48 8B 44 24 ? 48 89 42 ? C6 42 ? ? 48 83 45 ? ? EB ? 4C 8D 44 24 ? 48 8D 4D ? E8 ? ? ? ? 80 7D ? ? 74 ? 48 8D 4C 24 ? E8 ? ? ? ? 90 0F 28 45 ? 0F 11 45 ? 48 8B 55 ? 48 89 75 ? 48 8B 4D ? 48 89 75 ? 48 8B 45 ? 48 89 75 ? 48 89 45 ? 48 89 4D ? 48 89 55 ? 48 8B 55 ? 48 89 75 ? 48 8B 4D ? 48 89 75 ? 48 8B 45 ? 48 89 75 ? 48 89 45 ? 48 89 4D ? 48 89 55 ? 48 8D 55 ? 48 8B CB E8 ? ? ? ? 80 7D ? ? 75 ? 48 8D 4D ? E8 ? ? ? ? 48 8D 4D ? E8 ? ? ? ? EB ? 8B 45 ? 89 47 ? C6 43 ? ? 48 8B C3 48 8B 4D ? 48 33 CC E8 ? ? ? ? 48 8B 9C 24 ? ? ? ? 48 81 C4 ? ? ? ? 5F 5E 5D C3 CC CC CC CC 45 33 DB");
